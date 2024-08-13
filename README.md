@@ -17,6 +17,7 @@ This part utilizes the CLIP (Contrastive Language–Image Pre-training) model to
 
 ## Contents
 - [Install](#install)
+- [Dataset](#Dataset-SceneNetRGB-D)
 
 ## Install
 
@@ -33,17 +34,7 @@ git clone https://github.com/YuriLizi/ITI-Image-to-Text-to-Image.git
 cd ITI-Image-to-Text-to-Image
 ```
 
-2. Install Package
-```Shell
-conda create -n llava python=3.10 -y
-conda activate llava
-pip install --upgrade pip  # enable PEP 660 support
-pip install -e .
-```
-
-
-
-### Creating Two Virtual Environments in PyCharm
+### Creating Virtual Environment in PyCharm
 
 Launch PyCharm and open your project or create a new one.
 Create the First Virtual Environment (for LLaVA):
@@ -57,4 +48,28 @@ Choose Virtualenv Environment.
 Select New environment and specify the location for the virtual environment. Name it something like llava_env.
 In the Base interpreter dropdown, select your system Python interpreter.
 Click OK to create the environment.
-Install LLaVA Dependencies:
+Install LLaVA Dependencies.
+
+Do the same for CLIP Virtual Environment
+
+
+2. Install Package
+```Shell
+conda create -n llava python=3.10 -y
+conda activate llava
+pip install --upgrade pip  # enable PEP 660 support
+pip install -e .
+```
+
+
+
+
+## Dataset-SceneNetRGB-D
+We utilized the SceneNetRGB-D dataset to generate a subset consisting of 2,000 randomly selected images. For each image, we created two types of descriptions:
+
+#### Short Descriptions:
+Generated using the LLaVA-v1.6-mistral-7b model.
+#### Full Descriptions:
+Generated using the LLaVA-v1.6-vicuna-7b model.
+
+These descriptions were saved in separate CSV files, with each file containing the corresponding descriptions for the images.
