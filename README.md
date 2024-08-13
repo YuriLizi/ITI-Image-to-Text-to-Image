@@ -85,3 +85,28 @@ Generated using the LLaVA-v1.6-mistral-7b model.
 Generated using the LLaVA-v1.6-vicuna-7b model.
 
 These descriptions were saved in separate CSV files, with each file containing the corresponding descriptions for the images.
+
+## Usage
+### Dataset and Scripts
+In the directory ITI-Image-to-Text-to-Image/llava/eval/ITI_predictions, you'll find the following resources:
+
+#### Dataset:
+The subset of 2,000 randomly selected images from SceneNetRGB-D is located in the folder 2k_SceneNetRGB-D_dataset. This folder contains images along with their descriptions csv.
+
+#### Dataset Builder Scripts:
+
+* SceneNetRGB-D_random_images_picker.py:
+Script for picking randomly X images from each folder from the SceneNetRGB-D dataset.
+
+
+* Image_description_csv.py:
+Script for generating CSV files with image descriptions using LLaVA.
+SceneNetRGB-D_random_images_picker.py:
+Script for selecting a random subset of images from the SceneNetRGB-D dataset and saving them.
+
+### Feature Extraction and Similarity Search Scripts:
+
+* clip_features_extraction.py: Extracts CLIP features from images and saves them in a CSV file.(For future use, was not used for this project and is not supported by the Similarity_Search )
+* Similarity_Search_TTI.py: Finds similarity between user input text and image descriptions from the dataset using CLIP.
+* Similarity_Search_TTI_GUI.py: Provides a graphical user interface (GUI) for performing similarity searches.
+
