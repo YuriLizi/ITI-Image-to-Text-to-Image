@@ -18,7 +18,7 @@ This part utilizes the CLIP (Contrastive Language–Image Pre-training) model to
 ## Contents
 - [Install](#install)
 - [Dataset](#Dataset-SceneNetRGB-D)
-
+- [Usage](#Usage)
 ## Install
 
 NOTE: To use both LLaVA and CLIP with an older CUDA version (11.4), you need to create two separate virtual environments with specific versions of PyTorch:
@@ -107,6 +107,10 @@ Script for selecting a random subset of images from the SceneNetRGB-D dataset an
 ### Feature Extraction and Similarity Search Scripts:
 
 * clip_features_extraction.py: Extracts CLIP features from images and saves them in a CSV file.(For future use, was not used for this project and is not supported by the Similarity_Search )
+
+
 * Similarity_Search_TTI.py: Finds similarity between user input text and image descriptions from the dataset using CLIP.
+
+
 * Similarity_Search_TTI_GUI.py: Provides a graphical user interface (GUI) for performing similarity searches.
 
