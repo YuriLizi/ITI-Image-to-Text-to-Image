@@ -154,7 +154,7 @@ def eval_model(args):
             'Model Name': args.model_path
         })
 
-    csv_path = pathlib.Path("/home/linuxu/yuri/data/SceneNet_RGB-D/smaller_combined_train_0_data/2k_short_description_mistral-7b.csv")
+    csv_path = pathlib.Path(args.csvpath)
     save_to_csv(outputs, csv_path)
 
 if __name__ == "__main__":
@@ -168,6 +168,7 @@ if __name__ == "__main__":
     parser.add_argument("--top_p", type=float, default=None)
     parser.add_argument("--num_beams", type=int, default=1)
     parser.add_argument("--max_new_tokens", type=int, default=512)
+    parser.add_argument("--csvpath", type=str, default="test.csv")
     args = parser.parse_args()
 
     eval_model(args)

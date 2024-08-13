@@ -53,12 +53,24 @@ Install LLaVA Dependencies.
 Do the same for CLIP Virtual Environment
 
 
-2. Install Package
+2. Install Packages - for building new Dataset - LLaVA Virtual Environment
+
+
 ```Shell
-conda create -n llava python=3.10 -y
-conda activate llava
 pip install --upgrade pip  # enable PEP 660 support
 pip install -e .
+```
+
+3. Install Packages - for running Similarity Search Application - CLIP Virtual Environment
+
+   First, [install PyTorch 1.7.1](https://pytorch.org/get-started/locally/) (or later) and torchvision, as well as small additional dependencies, and then install this repo as a Python package. On a CUDA GPU machine, the following will do the trick:
+
+```Shell
+pip install ftfy regex tqdm
+pip install git+https://github.com/openai/CLIP.git
+pip install pandas
+pip install Kivy
+
 ```
 
 
