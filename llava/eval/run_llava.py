@@ -1,5 +1,9 @@
 import argparse
+import pathlib
+
 import torch
+from PIL import Image
+import pandas as pd
 
 from llava.constants import (
     IMAGE_TOKEN_INDEX,
@@ -24,7 +28,34 @@ from PIL import Image
 from io import BytesIO
 import re
 
+def set_seed(seed):
+    torch.manual_seed(seed)
+    if torch.cuda.is_available():
+        torch.cuda.manual_seed(seed)
+        torch.cuda.manual_seed_all(seed)  # if you are using multi-GPU.
+        torch.backends.cudnn.deterministic = True
+        torch.backends.cudnn.benchmark = False
 
+# Set a seed
+set_seed(42)
+def save_to_csv(image_name, prompt_string, output_string,Model_name, csv_path):
+    data = {
+        'Image Name': [image_name],
+        'Prompt String': [prompt_string],
+        'Output String': [output_string],
+        'Model Name': [Model_name]
+    }
+    df = pd.DataFrame(data)
+    try:
+        if not csv_path.exists():
+            df.to_csv(csv_path, index=False)
+            col_names = ["Image Name", "Prompt", "Image Description", "Model"]
+            df.columns = col_names
+        else:
+            df.to_csv(csv_path, mode='a', header=False, index=False)
+        print(f"Data saved to {csv_path}")
+    except Exception as e:
+        print(f"Error saving to CSV: {e}")
 def image_parser(args):
     out = args.image_file.split(args.sep)
     return out
@@ -126,11 +157,13 @@ def eval_model(args):
 
     outputs = tokenizer.batch_decode(output_ids, skip_special_tokens=True)[0].strip()
     print(outputs)
-
+    image_name = args.image_file.split('/')[-1]
+    csv_path =pathlib.Path("/home/linuxu/yuri/data/SceneNet_RGB-D/small_test_csv/amit_description.csv")
+    save_to_csv(image_name, args.query, outputs,args.model_path, csv_path)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--model-path", type=str, default="facebook/opt-350m")
+    parser.add_argument("--model-path", type=str, default="liuhaotian/llava-v1.6-vicuna-7b")
     parser.add_argument("--model-base", type=str, default=None)
     parser.add_argument("--image-file", type=str, required=True)
     parser.add_argument("--query", type=str, required=True)
